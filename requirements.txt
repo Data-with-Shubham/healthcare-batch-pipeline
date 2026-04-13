@@ -1,0 +1,11 @@
+# ── Core Pipeline ────────────────────────────────────────────
+apache-beam[gcp]==2.55.0
+google-cloud-storage==2.16.0
+google-cloud-bigquery==3.17.2
+
+# ── dbt ──────────────────────────────────────────────────────
+dbt-bigquery==1.7.7
+dbt-core==1.7.7
+
+# ── Utilities ────────────────────────────────────────────────
+python-dotenv==1.0.1
