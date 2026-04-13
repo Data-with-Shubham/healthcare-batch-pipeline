@@ -1,0 +1,21 @@
+healthcare_dwh:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth                      # use `service-account` in CI/CD
+      project: your-gcp-project-id      # ← update
+      dataset: healthcare_dwh
+      location: US
+      threads: 4
+      timeout_seconds: 600
+
+    prod:
+      type: bigquery
+      method: service-account
+      project: your-gcp-project-id      # ← update
+      dataset: healthcare_dwh_prod
+      keyfile: /secrets/sa-key.json     # mount via Secret Manager in Cloud Run
+      location: US
+      threads: 8
+      timeout_seconds: 900

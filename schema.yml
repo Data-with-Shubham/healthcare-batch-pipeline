@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: fact_admissions
+    description: "One row per hospital admission — core fact table."
+    columns:
+      - name: admission_id
+        description: "Unique admission identifier."
+        tests:
+          - unique
+          - not_null
+      - name: patient_id
+        tests: [not_null, relationships: {to: ref('dim_patients'), field: patient_id}]
+      - name: doctor_id
+        tests: [not_null, relationships: {to: ref('dim_doctors'), field: doctor_id}]
+      - name: department_id
+        tests: [not_null, relationships: {to: ref('dim_departments'), field: department_id}]
+      - name: treatment_id
+        tests: [not_null, relationships: {to: ref('dim_treatments'), field: treatment_id}]
+      - name: length_of_stay
+        tests:
+          - not_null
+          - dbt_utils.accepted_range: {min_value: 0}
+
+  - name: dim_patients
+    description: "Patient master dimension."
+    columns:
+      - name: patient_id
+        tests: [unique, not_null]
+      - name: gender
+        tests:
+          - accepted_values:
+              values: ["Male", "Female", "Other", "Unknown"]
+
+  - name: dim_doctors
+    description: "Doctor master dimension."
+    columns:
+      - name: doctor_id
+        tests: [unique, not_null]
+
+  - name: dim_departments
+    description: "Hospital department dimension."
+    columns:
+      - name: department_id
+        tests: [unique, not_null]
+
+  - name: dim_treatments
+    description: "Treatment catalogue dimension."
+    columns:
+      - name: treatment_id
+        tests: [unique, not_null]
+      - name: treatment_cost
+        tests:
+          - dbt_utils.accepted_range: {min_value: 0}

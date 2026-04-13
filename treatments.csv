@@ -1,0 +1,8 @@
+treatment_id,treatment_name,treatment_cost
+TRT-001,Angioplasty,85000.00
+TRT-002,Knee Replacement,120000.00
+TRT-003,MRI Brain Scan,8500.00
+TRT-004,Appendectomy,45000.00
+TRT-005,Chemotherapy,200000.00
+TRT-006,Dialysis,15000.00
+TRT-007,ECG Monitoring,3500.00
